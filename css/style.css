@@ -1,0 +1,96 @@
+.lavishly-yours-regular {
+    font-family: "Lavishly Yours", cursive;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  h1 {
+    font-family: "Lavishly Yours", cursive;
+    font-weight: 800;
+    font-style: normal;
+    font-size: larger;
+  }
+  
+  /* Sliders gris modernes */
+  input[type=range].custom-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    background: #e5e7eb;
+    border-radius: 4px;
+    outline: none;
+    transition: background 0.3s;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Chrome/Safari/Opera */
+  input[type=range].custom-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #6b7280;
+    cursor: pointer;
+    box-shadow: 0 0 2px #3333;
+    transition: background 0.3s;
+  }
+  input[type=range].custom-slider:focus::-webkit-slider-thumb,
+  input[type=range].custom-slider::-webkit-slider-thumb:hover {
+    background: #374151;
+  }
+  input[type=range].custom-slider::-webkit-slider-runnable-track {
+    height: 6px;
+    background: #e5e7eb;
+    border-radius: 4px;
+  }
+  
+  /* Firefox */
+  input[type=range].custom-slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #6b7280;
+    cursor: pointer;
+    box-shadow: 0 0 2px #3333;
+    transition: background 0.3s;
+  }
+  input[type=range].custom-slider:focus::-moz-range-thumb,
+  input[type=range].custom-slider::-moz-range-thumb:hover {
+    background: #374151;
+  }
+  input[type=range].custom-slider::-moz-range-track {
+    height: 6px;
+    background: #e5e7eb;
+    border-radius: 4px;
+  }
+  
+  /* Edge/IE */
+  input[type=range].custom-slider::-ms-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #6b7280;
+    cursor: pointer;
+    box-shadow: 0 0 2px #3333;
+    transition: background 0.3s;
+  }
+  input[type=range].custom-slider:focus::-ms-thumb,
+  input[type=range].custom-slider::-ms-thumb:hover {
+    background: #374151;
+  }
+  input[type=range].custom-slider::-ms-fill-lower,
+  input[type=range].custom-slider::-ms-fill-upper {
+    background: #e5e7eb;
+    border-radius: 4px;
+  }
+  
+  /* Remove outline and native background */
+  input[type=range].custom-slider:focus {
+    outline: none;
+  }
+  input[type=range].custom-slider::-ms-tooltip {
+    display: none;
+  }
