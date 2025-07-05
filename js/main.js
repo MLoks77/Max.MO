@@ -3,9 +3,12 @@
 // Sélection des éléments du DOM
 const imageInput = document.getElementById('image-upload');
 const optionsPanel = document.getElementById('options-panel');
-const canvas = document.getElementById('main-canvas');
-const ctx = canvas.getContext('2d');
+const imageContainer = document.getElementById('image-container');
+const displayImage = document.getElementById('display-image');
+const filtersOverlay = document.getElementById('filters-overlay');
+const placeholder = document.getElementById('placeholder');
 const downloadBtn = document.getElementById('download-btn');
+const resetBtn = document.getElementById('reset-btn');
 
 // Sliders
 const brightnessSlider = document.getElementById('brightness');
@@ -13,14 +16,26 @@ const contrastSlider = document.getElementById('contrast');
 const saturationSlider = document.getElementById('saturation');
 const hueSlider = document.getElementById('hue');
 const noiseSlider = document.getElementById('noise');
+const blurSlider = document.getElementById('blur');
+const sepiaSlider = document.getElementById('sepia');
+const invertSlider = document.getElementById('invert');
+const grayscaleSlider = document.getElementById('grayscale');
 
-let originalImage = null; // Image d'origine (Image ou OpenCV mat)
-let currentImage = null;  // Image modifiée (OpenCV mat)
-let originalMat = null; // Image d'origine sous forme de cv.Mat
+// Valeurs affichées
+const brightnessValue = document.getElementById('brightness-value');
+const contrastValue = document.getElementById('contrast-value');
+const saturationValue = document.getElementById('saturation-value');
+const hueValue = document.getElementById('hue-value');
+const noiseValue = document.getElementById('noise-value');
+const blurValue = document.getElementById('blur-value');
+const sepiaValue = document.getElementById('sepia-value');
+const invertValue = document.getElementById('invert-value');
+const grayscaleValue = document.getElementById('grayscale-value');
 
-// Attendre que OpenCV soit prêt
+let originalImage = null;
+
+// Attendre que OpenCV soit prêt (plus nécessaire mais gardé pour compatibilité)
 function onOpenCvReady() {
-    // On peut activer l'import d'image
     imageInput.disabled = false;
 }
 if (typeof cv === 'undefined') {
@@ -30,8 +45,8 @@ if (typeof cv === 'undefined') {
     onOpenCvReady();
 }
 
-// Taille max du canvas (padding pour la barre latérale)
-function getMaxCanvasSize() {
+// Taille max de l'image (padding pour la barre latérale)
+function getMaxImageSize() {
     const main = document.querySelector('main');
     let maxWidth = main.clientWidth || window.innerWidth;
     let maxHeight = main.clientHeight || window.innerHeight;
@@ -49,15 +64,15 @@ function fitSizeToBox(imgWidth, imgHeight, boxWidth, boxHeight) {
     };
 }
 
-function resizeCanvasToImage() {
+function resizeImageToContainer() {
     if (!originalImage) return;
-    const { maxWidth, maxHeight } = getMaxCanvasSize();
+    const { maxWidth, maxHeight } = getMaxImageSize();
     const { width, height } = fitSizeToBox(originalImage.width, originalImage.height, maxWidth, maxHeight);
-    canvas.width = width;
-    canvas.height = height;
+    displayImage.style.width = width + 'px';
+    displayImage.style.height = height + 'px';
 }
 
-// 1. Import d'image (modifié pour resize)
+// 1. Import d'image
 imageInput.addEventListener('change', (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -66,11 +81,12 @@ imageInput.addEventListener('change', (e) => {
         const img = new Image();
         img.onload = function() {
             originalImage = img;
-            resizeCanvasToImage();
-            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-            // Convertit en cv.Mat
-            if (originalMat) originalMat.delete();
-            originalMat = cv.imread(canvas);
+            displayImage.src = event.target.result;
+            resizeImageToContainer();
+            
+
+            imageContainer.classList.remove('hidden');
+            placeholder.classList.add('hidden');
             optionsPanel.classList.remove('hidden');
             downloadBtn.disabled = false;
             resetSliders();
@@ -80,17 +96,10 @@ imageInput.addEventListener('change', (e) => {
     reader.readAsDataURL(file);
 });
 
-// Redimensionnement dynamique lors du resize de la fenêtre
+
 window.addEventListener('resize', () => {
     if (!originalImage) return;
-    resizeCanvasToImage();
-    // Recharge l'image d'origine dans le canvas
-    ctx.drawImage(originalImage, 0, 0, canvas.width, canvas.height);
-    // Met à jour le cv.Mat d'origine
-    if (originalMat) originalMat.delete();
-    originalMat = cv.imread(canvas);
-    // Réapplique les modifications
-    applyImageModifications();
+    resizeImageToContainer();
 });
 
 // 2. Réinitialisation des sliders
@@ -100,63 +109,161 @@ function resetSliders() {
     saturationSlider.value = 0;
     hueSlider.value = 0;
     noiseSlider.value = 0;
+    blurSlider.value = 0;
+    sepiaSlider.value = 0;
+    invertSlider.value = 0;
+    grayscaleSlider.value = 0;
+    
+
+    updateSliderValues();
+    
+
+    applyFilters();
 }
 
-// 3. Application des modifications en temps réel
-const sliders = [brightnessSlider, contrastSlider, saturationSlider, hueSlider, noiseSlider];
+
+resetBtn.addEventListener('click', resetSliders);
+
+// 3. Application des filtres CSS
+let timeoutId = null;
+
+function updateSliderValues() {
+    brightnessValue.textContent = brightnessSlider.value;
+    contrastValue.textContent = contrastSlider.value;
+    saturationValue.textContent = saturationSlider.value;
+    hueValue.textContent = hueSlider.value;
+    noiseValue.textContent = noiseSlider.value;
+    blurValue.textContent = blurSlider.value;
+    sepiaValue.textContent = sepiaSlider.value;
+    invertValue.textContent = invertSlider.value;
+    grayscaleValue.textContent = grayscaleSlider.value;
+}
+
+function debouncedApplyFilters() {
+    if (timeoutId) clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+        updateSliderValues();
+        applyFilters();
+    }, 50);
+}
+
+const sliders = [brightnessSlider, contrastSlider, saturationSlider, hueSlider, noiseSlider, blurSlider, sepiaSlider, invertSlider, grayscaleSlider];
 sliders.forEach(slider => {
-    slider.addEventListener('input', applyImageModifications);
+    slider.addEventListener('input', debouncedApplyFilters);
 });
 
-function applyImageModifications() {
-    if (!originalMat) return;
-    // Copie l'image d'origine
-    let mat = originalMat.clone();
-    // 1. Luminosité et contraste
-    let alpha = 1 + parseInt(contrastSlider.value) / 100; // contraste
-    let beta = parseInt(brightnessSlider.value); // luminosité
-    mat.convertTo(mat, -1, alpha, beta);
-    // 2. Saturation et teinte
-    let hsv = new cv.Mat();
-    cv.cvtColor(mat, hsv, cv.COLOR_RGBA2RGB);
-    cv.cvtColor(hsv, hsv, cv.COLOR_RGB2HSV);
-    // Saturation
-    let s = parseInt(saturationSlider.value);
-    let h = parseInt(hueSlider.value);
-    for (let i = 0; i < hsv.rows; i++) {
-        for (let j = 0; j < hsv.cols; j++) {
-            let pixel = hsv.ucharPtr(i, j);
-            // Teinte
-            pixel[0] = (pixel[0] + h + 180) % 180;
-            // Saturation
-            let sat = pixel[1] + s;
-            pixel[1] = Math.max(0, Math.min(255, sat));
-        }
-    }
-    cv.cvtColor(hsv, mat, cv.COLOR_HSV2RGB);
-    cv.cvtColor(mat, mat, cv.COLOR_RGB2RGBA);
-    hsv.delete();
-    // 3. Bruit
-    let noise = parseInt(noiseSlider.value);
+function applyFilters() {
+    const brightness = parseInt(brightnessSlider.value);
+    const contrast = parseInt(contrastSlider.value);
+    const saturation = parseInt(saturationSlider.value);
+    const hue = parseInt(hueSlider.value);
+    const noise = parseInt(noiseSlider.value);
+    const blur = parseInt(blurSlider.value);
+    const sepia = parseInt(sepiaSlider.value);
+    const invert = parseInt(invertSlider.value);
+    const grayscale = parseInt(grayscaleSlider.value);
+    
+    let filterString = '';
+    if (brightness !== 0) filterString += `brightness(${1 + brightness / 100}) `;
+    if (contrast !== 0) filterString += `contrast(${1 + contrast / 100}) `;
+    if (saturation !== 0) filterString += `saturate(${1 + saturation / 100}) `;
+    if (hue !== 0) filterString += `hue-rotate(${hue}deg) `;
+    if (blur !== 0) filterString += `blur(${blur}px) `;
+    if (sepia !== 0) filterString += `sepia(${sepia}%) `;
+    if (invert !== 0) filterString += `invert(${invert}%) `;
+    if (grayscale !== 0) filterString += `grayscale(${grayscale}%) `;
+    displayImage.style.filter = filterString;
+    
+
     if (noise > 0) {
-        let noiseMat = cv.Mat.zeros(mat.rows, mat.cols, mat.type());
-        cv.randn(noiseMat, 0, noise); // bruit gaussien
-        cv.add(mat, noiseMat, mat, new cv.Mat(), mat.type());
-        noiseMat.delete();
+        const noiseOpacity = noise / 100;
+        filtersOverlay.style.background = `url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100" height="100" filter="url(%23noise)"/></svg>')`;
+        filtersOverlay.style.opacity = noiseOpacity;
+        filtersOverlay.style.mixBlendMode = 'overlay';
+    } else {
+        filtersOverlay.style.background = 'none';
+        filtersOverlay.style.opacity = '0';
     }
-    // Affiche le résultat
-    cv.imshow(canvas, mat);
-    mat.delete();
 }
 
 // 4. Téléchargement de l'image modifiée
-
 downloadBtn.addEventListener('click', () => {
+
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    
+    canvas.width = displayImage.naturalWidth;
+    canvas.height = displayImage.naturalHeight;
+    
+ 
+    ctx.filter = displayImage.style.filter;
+    ctx.drawImage(displayImage, 0, 0);
+    
+
+    const noise = parseInt(noiseSlider.value);
+    if (noise > 0) {
+  
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const data = imageData.data;
+        const noiseIntensity = noise / 100;
+        
+        for (let i = 0; i < data.length; i += 4) {
+            const noise = (Math.random() - 0.5) * 255 * noiseIntensity;
+            data[i] = Math.max(0, Math.min(255, data[i] + noise));     // R
+            data[i + 1] = Math.max(0, Math.min(255, data[i + 1] + noise)); // G
+            data[i + 2] = Math.max(0, Math.min(255, data[i + 2] + noise)); // B
+        }
+        
+        ctx.putImageData(imageData, 0, 0);
+    }
+    
+    
     const link = document.createElement('a');
     link.download = 'image_modifiee.png';
     link.href = canvas.toDataURL('image/png');
     link.click();
 });
 
-// TODO : Charger OpenCV.js et appliquer les effets réels
-// (Le code ci-dessus prépare l'interface et la logique de base)
+// Synchronisation sliders <-> inputs + reset individuel
+const sliderConfigs = [
+    { id: 'brightness', min: -100, max: 100, def: 0 },
+    { id: 'contrast', min: -100, max: 100, def: 0 },
+    { id: 'saturation', min: -100, max: 100, def: 0 },
+    { id: 'hue', min: -180, max: 180, def: 0 },
+    { id: 'noise', min: 0, max: 100, def: 0 },
+    { id: 'blur', min: 0, max: 20, def: 0 },
+    { id: 'sepia', min: 0, max: 100, def: 0 },
+    { id: 'invert', min: 0, max: 100, def: 0 },
+    { id: 'grayscale', min: 0, max: 100, def: 0 },
+];
+
+sliderConfigs.forEach(cfg => {
+    const slider = document.getElementById(cfg.id);
+    const input = document.getElementById(cfg.id + '-value');
+    // Slider -> input
+    slider.addEventListener('input', () => {
+        input.value = slider.value;
+        debouncedApplyFilters();
+    });
+    // Input -> slider
+    input.addEventListener('input', () => {
+        let val = parseInt(input.value);
+        if (isNaN(val)) val = cfg.def;
+        val = Math.max(cfg.min, Math.min(cfg.max, val));
+        slider.value = val;
+        input.value = val;
+        debouncedApplyFilters();
+    });
+});
+
+// Reset individuel
+Array.from(document.querySelectorAll('.reset-slider-btn')).forEach(btn => {
+    btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-slider');
+        const cfg = sliderConfigs.find(c => c.id === id);
+        if (!cfg) return;
+        document.getElementById(id).value = cfg.def;
+        document.getElementById(id + '-value').value = cfg.def;
+        debouncedApplyFilters();
+    });
+});

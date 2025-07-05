@@ -1,60 +1,251 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <title>MaxMO</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Inline:opsz,wght@10..72,100..900&family=Didact+Gothic&family=Funnel+Display:wght@300..800&family=Kurale&family=Lavishly+Yours&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Inline:opsz,wght@10..72,100..900&family=Didact+Gothic&family=Funnel+Display:wght@300..800&family=Kurale&family=Lavishly+Yours&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap"
+        rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script async src="https://docs.opencv.org/4.x/opencv.js" type="text/javascript"></script>
 </head>
+
 <body>
     <header class="flex items-center justify-between px-6 py-4 bg-[#fffbbf] shadow" alt="navbar">
         <h1 class="text-4xl font-bold text-gray-600">MaxMO</h1>
         <div>
+            <p class="text-center text-gray-600">
+                © 2025 Maxime Derènes - Éditeur d'image avec OpenCV.js - MaxMo
+            </p>
+        </div>
+        <div>
             <img src="images/OpenCV.png" alt="Logo" class="h-10 w-10 object-contain">
         </div>
     </header>
-    <div class="flex flex-col md:flex-row flex-grow min-h-[calc(100vh-72px)]" style="min-height:calc(100vh - 102px);">
+    <div class="flex flex-col md:flex-row flex-grow min-h-[calc(100vh-72px)] h-[calc(100vh-72px)]">
         <!-- Barre de navigation verticale -->
-        <nav class="w-full md:w-1/4 bg-[#f7f7e8] border-r border-b md:border-b-0 border-gray-200 flex flex-col items-center py-8 justify-between h-auto md:h-[70vh] min-h-[unset]">
+        <nav
+            class="z-2 w-full md:w-1/4 bg-[#f7f7e8] border-r border-b md:border-b-0 border-gray-200 flex flex-col items-center py-8 justify-between h-auto md:h-full max-h-[50vh] md:max-h-none overflow-y-auto">
             <div class="w-full flex flex-col items-center gap-6">
-                <label for="image-upload" class="block text-gray-700 font-semibold mb-2">Importer une image</label>
-                <input type="file" id="image-upload" accept="image/*" class="mb-4" />
-                <div id="options-panel" class="w-full flex flex-col gap-4 mt-4 hidden">
-                    <label class="block text-gray-600">Luminosité
-                        <input type="range" id="brightness" min="-100" max="100" value="0" class="w-full custom-slider">
-                    </label>
-                    <label class="block text-gray-600">Contraste
-                        <input type="range" id="contrast" min="-100" max="100" value="0" class="w-full custom-slider">
-                    </label>
-                    <label class="block text-gray-600">Saturation
-                        <input type="range" id="saturation" min="-100" max="100" value="0" class="w-full custom-slider">
-                    </label>
-                    <label class="block text-gray-600">Teinte
-                        <input type="range" id="hue" min="-180" max="180" value="0" class="w-full custom-slider">
-                    </label>
-                    <label class="block text-gray-600">Bruit
-                        <input type="range" id="noise" min="0" max="100" value="0" class="w-full custom-slider">
-                    </label>
-                </div>
-            </div>
-            <button id="download-btn" class="mt-8 px-4 py-2 bg-yellow-300 text-gray-700 rounded shadow font-semibold hover:bg-yellow-400 transition disabled:opacity-50" disabled>Télécharger l'image</button>
+                <label for="image-upload"
+                    class="block text-gray-700 font-semibold mb-2 cursor-pointer hover:text-amber-700 transition-colors duration-200 flex items-center justify-center gap-2 bg-gradient-to-r from-amber-50 to-yellow-50 hover:from-amber-100 hover:to-yellow-100 px-4 py-3 rounded-lg border-2 border-dashed border-amber-200 hover:border-amber-400 shadow-sm hover:shadow-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                    </svg>
+                    Importer une image
+                </label>
+                <input type="file" id="image-upload" accept="image/*" class="mb-4 hidden" />
+                <div id="options-panel" class="w-full flex flex-col gap-6 mt-6 hidden">
+                    <!-- Section Luminosité et Contraste -->
+                    <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+                        <h3 class="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                            <svg class="w-4 h-4 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" />
+                            </svg>
+                            Luminosité & Contraste
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-3">
+                                <span class="text-xs text-gray-600 font-medium w-16">Luminosité</span>
+                                <input type="range" id="brightness" min="-100" max="100" value="0" class="flex-1 custom-slider">
+                                <input id="brightness-value" type="number" min="-100" max="100" value="0" class="slider-value-input text-xs font-bold text-indigo-600 w-12 text-center bg-indigo-50 px-1 py-0.5 rounded border border-indigo-200 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition" />
+                                <button type="button" class="reset-slider-btn ml-1" data-slider="brightness">
+                                    <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400 hover:text-indigo-600 transition" fill="none"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="translate(2 2)"><path d="m12.5 1.5c2.4138473 1.37729434 4 4.02194088 4 7 0 4.418278-3.581722 8-8 8s-8-3.581722-8-8 3.581722-8 8-8"></path><path d="m12.5 5.5v-4h4"></path></g></svg>
+                                </button>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-xs text-gray-600 font-medium w-16">Contraste</span>
+                                <input type="range" id="contrast" min="-100" max="100" value="0"
+                                    class="flex-1 custom-slider">
+                                <input id="contrast-value" type="number" min="-100" max="100" value="0" class="slider-value-input text-xs font-bold text-indigo-600 w-12 text-center bg-indigo-50 px-1 py-0.5 rounded border border-indigo-200 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition" />
+                                <button type="button" class="reset-slider-btn ml-1" data-slider="contrast">
+                                    <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400 hover:text-indigo-600 transition" fill="none"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="translate(2 2)"><path d="m12.5 1.5c2.4138473 1.37729434 4 4.02194088 4 7 0 4.418278-3.581722 8-8 8s-8-3.581722-8-8 3.581722-8 8-8"></path><path d="m12.5 5.5v-4h4"></path></g></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section Couleurs -->
+                    <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+                        <h3 class="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                            <svg class="w-4 h-4 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            Couleurs
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-3">
+                                <span class="text-xs text-gray-600 font-medium w-16">Saturation</span>
+                                <input type="range" id="saturation" min="-100" max="100" value="0"
+                                    class="flex-1 custom-slider">
+                                <input id="saturation-value" type="number" min="-100" max="100" value="0" class="slider-value-input text-xs font-bold text-purple-600 w-12 text-center bg-purple-50 px-1 py-0.5 rounded border border-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 transition" />
+                                <button type="button" class="reset-slider-btn ml-1" data-slider="saturation">
+                                    <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400 hover:text-purple-600 transition" fill="none"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="translate(2 2)"><path d="m12.5 1.5c2.4138473 1.37729434 4 4.02194088 4 7 0 4.418278-3.581722 8-8 8s-8-3.581722-8-8 3.581722-8 8-8"></path><path d="m12.5 5.5v-4h4"></path></g></svg>
+                                </button>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-xs text-gray-600 font-medium w-16">Teinte</span>
+                                <input type="range" id="hue" min="-180" max="180" value="0"
+                                    class="flex-1 custom-slider">
+                                <input id="hue-value" type="number" min="-180" max="180" value="0" class="slider-value-input text-xs font-bold text-purple-600 w-12 text-center bg-purple-50 px-1 py-0.5 rounded border border-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 transition" />
+                                <button type="button" class="reset-slider-btn ml-1" data-slider="hue">
+                                    <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400 hover:text-purple-600 transition" fill="none"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="translate(2 2)"><path d="m12.5 1.5c2.4138473 1.37729434 4 4.02194088 4 7 0 4.418278-3.581722 8-8 8s-8-3.581722-8-8 3.581722-8 8-8"></path><path d="m12.5 5.5v-4h4"></path></g></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section Effets -->
+                    <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+                        <h3 class="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                            <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            Effets
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-3">
+                                <span class="text-xs text-gray-600 font-medium w-16">Bruit</span>
+                                <input type="range" id="noise" min="0" max="100" value="0" class="flex-1 custom-slider">
+                                <input id="noise-value" type="number" min="0" max="100" value="0" class="slider-value-input text-xs font-bold text-green-600 w-12 text-center bg-green-50 px-1 py-0.5 rounded border border-green-200 focus:outline-none focus:ring-2 focus:ring-green-400 transition" />
+                                <button type="button" class="reset-slider-btn ml-1" data-slider="noise">
+                                    <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400 hover:text-green-600 transition" fill="none"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="translate(2 2)"><path d="m12.5 1.5c2.4138473 1.37729434 4 4.02194088 4 7 0 4.418278-3.581722 8-8 8s-8-3.581722-8-8 3.581722-8 8-8"></path><path d="m12.5 5.5v-4h4"></path></g></svg>
+                                </button>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-xs text-gray-600 font-medium w-16">Flou</span>
+                                <input type="range" id="blur" min="0" max="20" value="0" class="flex-1 custom-slider">
+                                <input id="blur-value" type="number" min="0" max="20" value="0" class="slider-value-input text-xs font-bold text-green-600 w-12 text-center bg-green-50 px-1 py-0.5 rounded border border-green-200 focus:outline-none focus:ring-2 focus:ring-green-400 transition" />
+                                <button type="button" class="reset-slider-btn ml-1" data-slider="blur">
+                                    <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400 hover:text-green-600 transition" fill="none"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="translate(2 2)"><path d="m12.5 1.5c2.4138473 1.37729434 4 4.02194088 4 7 0 4.418278-3.581722 8-8 8s-8-3.581722-8-8 3.581722-8 8-8"></path><path d="m12.5 5.5v-4h4"></path></g></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section Filtres -->
+                    <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+                        <h3 class="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                            <svg class="w-4 h-4 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            Filtres
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-3">
+                                <span class="text-xs text-gray-600 font-medium w-16">Sépia</span>
+                                <input type="range" id="sepia" min="0" max="100" value="0" class="flex-1 custom-slider">
+                                <input id="sepia-value" type="number" min="0" max="100" value="0" class="slider-value-input text-xs font-bold text-orange-600 w-12 text-center bg-orange-50 px-1 py-0.5 rounded border border-orange-200 focus:outline-none focus:ring-2 focus:ring-orange-400 transition" />
+                                <button type="button" class="reset-slider-btn ml-1" data-slider="sepia">
+                                    <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400 hover:text-orange-600 transition" fill="none"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="translate(2 2)"><path d="m12.5 1.5c2.4138473 1.37729434 4 4.02194088 4 7 0 4.418278-3.581722 8-8 8s-8-3.581722-8-8 3.581722-8 8-8"></path><path d="m12.5 5.5v-4h4"></path></g></svg>
+                                </button>
+                            </div>
+                            <div id="options-panel" class="w-full flex flex-col gap-4 mt-4 hidden">
+                                <label class="block text-gray-500 flex items-center justify-between font-medium">
+                                    <span class="text-sm">Luminosité</span>
+                                    <input type="range" id="brightness" min="-100" max="100" value="0"
+                                        class="w-full custom-slider mx-2">
+                                    <span id="brightness-value"
+                                        class="text-indigo-500 font-medium w-8 text-right text-sm">0</span>
+                                </label>
+                                <label class="block text-gray-500 flex items-center justify-between font-medium">
+                                    <span class="text-sm">Contraste</span>
+                                    <input type="range" id="contrast" min="-100" max="100" value="0"
+                                        class="w-full custom-slider mx-2">
+                                    <span id="contrast-value"
+                                        class="text-indigo-500 font-medium w-8 text-right text-sm">0</span>
+                                </label>
+                                <label class="block text-gray-500 flex items-center justify-between font-medium">
+                                    <span class="text-sm">Saturation</span>
+                                    <input type="range" id="saturation" min="-100" max="100" value="0"
+                                        class="w-full custom-slider mx-2">
+                                    <span id="saturation-value"
+                                        class="text-indigo-500 font-medium w-8 text-right text-sm">0</span>
+                                </label>
+                                <label class="block text-gray-500 flex items-center justify-between font-medium">
+                                    <span class="text-sm">Teinte</span>
+                                    <input type="range" id="hue" min="-180" max="180" value="0"
+                                        class="w-full custom-slider mx-2">
+                                    <span id="hue-value"
+                                        class="text-indigo-500 font-medium w-8 text-right text-sm">0</span>
+                                </label>
+                                <label class="block text-gray-500 flex items-center justify-between font-medium">
+                                    <span class="text-sm">Bruit</span>
+                                    <input type="range" id="noise" min="0" max="100" value="0"
+                                        class="w-full custom-slider mx-2">
+                                    <span id="noise-value"
+                                        class="text-indigo-500 font-medium w-8 text-right text-sm">0</span>
+                                </label>
+                                <label class="block text-gray-500 flex items-center justify-between font-medium">
+                                    <span class="text-sm">Flou</span>
+                                    <input type="range" id="blur" min="0" max="20" value="0"
+                                        class="w-full custom-slider mx-2">
+                                    <span id="blur-value"
+                                        class="text-indigo-500 font-medium w-8 text-right text-sm">0</span>
+                                </label>
+                                <label class="block text-gray-500 flex items-center justify-between font-medium">
+                                    <span class="text-sm">Sépia</span>
+                                    <input type="range" id="sepia" min="0" max="100" value="0"
+                                        class="w-full custom-slider mx-2">
+                                    <span id="sepia-value"
+                                        class="text-indigo-500 font-medium w-8 text-right text-sm">0</span>
+                                </label>
+                                <label class="block text-gray-500 flex items-center justify-between font-medium">
+                                    <span class="text-sm">Inversion</span>
+                                    <input type="range" id="invert" min="0" max="100" value="0"
+                                        class="w-full custom-slider mx-2">
+                                    <span id="invert-value"
+                                        class="text-indigo-500 font-medium w-8 text-right text-sm">0</span>
+                                </label>
+                                <label class="block text-gray-500 flex items-center justify-between font-medium">
+                                    <span class="text-sm">Niveaux de gris</span>
+                                    <input type="range" id="grayscale" min="0" max="100" value="0"
+                                        class="w-full custom-slider mx-2">
+                                    <span id="grayscale-value"
+                                        class="text-indigo-500 font-medium w-8 text-right text-sm">0</span>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- Boutons de contrôle -->
+                        <div class="flex flex-col gap-3 w-full px-4">
+                            <button id="reset-btn" class="btn-secondary">Reset</button>
+                            <button id="download-btn" class="btn-primary flex items-center justify-center gap-2"
+                                disabled>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V4" />
+                                </svg>
+                                Télécharger l'image
+                            </button>
+                        </div>
         </nav>
-        <!-- Zone du canvas -->
-        <main class="flex-1 flex items-center justify-center bg-white overflow-auto">
-            <canvas id="main-canvas" class="border border-gray-300 shadow-lg rounded-lg max-w-full h-auto" width="900" height="600">
-                Votre navigateur ne supporte pas le canvas HTML5.
-            </canvas>
+        <!-- Zone de l'image -->
+        <main class="flex-1 flex items-center justify-center bg-white overflow-auto w-full">
+            <div id="image-container" class="relative w-full max-w-2xl h-auto mx-auto hidden shadow-2xl rounded-lg">
+                <img id="display-image" class="w-full max-w-full h-auto mx-auto" alt="Image modifiée">
+                <div id="filters-overlay" class="absolute inset-0 pointer-events-none"></div>
+            </div>
+            <div id="placeholder" class="text-gray-500 text-lg w-full text-center">
+                Importez une image pour commencer
+            </div>
         </main>
     </div>
-    <footer>
-    <div class="w-full text-center py-4 bg-[#fffbbf] text-gray-500 text-sm fixed bottom-0 left-0 z-50">
-        © 2025 Maxime Derènes - Éditeur d'image avec OpenCV.js - MaxMo
-    </div>
-    </footer>
 
 
 
@@ -63,4 +254,5 @@
 
     <script src="js/main.js"></script>
 </body>
+
 </html>
