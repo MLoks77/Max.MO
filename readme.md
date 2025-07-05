@@ -50,28 +50,5 @@ Aucune installation requise !
 
 ---
 
-## 🖼️ Aperçu
-
-![Aperçu de l’éditeur MaxMO](./images/OpenCVjs.jpg)
-
----
-
-## 🤝 Contribuer
-
-Les PR et suggestions sont les bienvenues !
-
-Tu peux :
-- Proposer de nouveaux effets ou presets
-- Améliorer l’UI/UX
-- Corriger des bugs ou optimiser le code
-
----
-
-## 📄 Licence
-
-Projet open-source sous licence MIT.
-
----
-
 **Auteur** : Maxime Derènes  
 Projet pédagogique et créatif – 2025
