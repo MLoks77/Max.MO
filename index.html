@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MaxMO | Maxime Derènes</title>
     
-    <!-- Métadonnées SEO -->
+
     <meta name="description" content="Éditeur d'image en ligne gratuit utilisant OpenCV.js. Ajustez luminosité, contraste, saturation, teinte, ajoutez des effets (flou, sépia, inversion) et téléchargez vos images modifiées. Outil de retouche photo professionnel dans votre navigateur.">
     <meta name="keywords" content="éditeur d'image, retouche photo, OpenCV.js, luminosité, contraste, saturation, effets photo, traitement d'image, Maxime Derènes, MaxMO">
     <meta name="author" content="Maxime Derènes">
@@ -14,25 +14,20 @@
     <meta name="language" content="fr">
     <meta name="revisit-after" content="7 days">
     
-    <!-- Open Graph / Facebook -->
+
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://maxmo.vercel.app/">
     <meta property="og:title" content="MaxMO - Éditeur d'image en ligne avec OpenCV.js">
     <meta property="og:description" content="Éditeur d'image en ligne gratuit utilisant OpenCV.js. Ajustez luminosité, contraste, saturation, teinte, ajoutez des effets et téléchargez vos images modifiées.">
-    <meta property="og:image" content="https://maxmo.vercel.app/images/OpenCVjs.jpg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
     <meta property="og:site_name" content="MaxMO">
     <meta property="og:locale" content="fr_FR">
     
-    <!-- Twitter -->
+
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://maxmo.vercel.app/">
     <meta property="twitter:title" content="MaxMO - Éditeur d'image en ligne avec OpenCV.js">
     <meta property="twitter:description" content="Éditeur d'image en ligne gratuit utilisant OpenCV.js. Ajustez luminosité, contraste, saturation, teinte, ajoutez des effets et téléchargez vos images modifiées.">
-    <meta property="twitter:image" content="https://maxmo.vercel.app/images/OpenCVjs.jpg">
     
-    <!-- Métadonnées supplémentaires -->
     <meta name="theme-color" content="#fffbbf">
     <meta name="msapplication-TileColor" content="#fffbbf">
     <meta name="application-name" content="MaxMO">
@@ -40,7 +35,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     
-    <!-- Favicons -->
+
     <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
@@ -68,7 +63,7 @@
         </div>
     </header>
     <div class="flex flex-col md:flex-row flex-grow min-h-[calc(100vh-72px)] h-[calc(100vh-72px)]">
-        <!-- Barre de navigation verticale -->
+
         <nav
             class="z-2 w-full md:w-1/4 bg-[#f7f7e8] border-r border-b md:border-b-0 border-gray-200 flex flex-col items-center py-8 justify-between h-auto md:h-full max-h-[50vh] md:max-h-none overflow-y-auto">
             <div class="w-full flex flex-col items-center gap-6">
@@ -83,7 +78,7 @@
                 </label>
                 <input type="file" id="image-upload" accept="image/*" class="mb-4 hidden" />
                 <div id="options-panel" class="w-full flex flex-col gap-4 mb-4 hidden">
-                    <!-- Luminosité -->
+ 
                     <div class="flex items-center gap-3">
                         <span class="text-xs text-gray-600 font-medium w-16 ml-1">Luminosité</span>
                         <input type="range" id="brightness" min="-100" max="100" value="0" class="flex-1 custom-slider">
@@ -93,7 +88,7 @@
                         </button>
                     </div>
 
-                    <!-- Contraste -->
+
                     <div class="flex items-center gap-3">
                         <span class="text-xs text-gray-600 font-medium w-16 ml-1">Contraste</span>
                         <input type="range" id="contrast" min="-100" max="100" value="0" class="flex-1 custom-slider">
@@ -103,7 +98,7 @@
                         </button>
                     </div>
 
-                    <!-- Saturation -->
+
                     <div class="flex items-center gap-3">
                         <span class="text-xs text-gray-600 font-medium w-16 ml-1">Saturation</span>
                         <input type="range" id="saturation" min="-100" max="100" value="0" class="flex-1 custom-slider">
@@ -113,7 +108,7 @@
                         </button>
                     </div>
 
-                    <!-- Teinte -->
+
                     <div class="flex items-center gap-3">
                         <span class="text-xs text-gray-600 font-medium w-16 ml-1">Teinte</span>
                         <input type="range" id="hue" min="-180" max="180" value="0" class="flex-1 custom-slider">
@@ -123,7 +118,7 @@
                         </button>
                     </div>
 
-                    <!-- Bruit -->
+                   
                     <div class="flex items-center gap-3">
                         <span class="text-xs text-gray-600 font-medium w-16 ml-1">Bruit</span>
                         <input type="range" id="noise" min="0" max="100" value="0" class="flex-1 custom-slider">
@@ -133,7 +128,7 @@
                         </button>
                     </div>
 
-                    <!-- Flou -->
+                  
                     <div class="flex items-center gap-3">
                         <span class="text-xs text-gray-600 font-medium w-16 ml-1">Flou</span>
                         <input type="range" id="blur" min="0" max="20" value="0" class="flex-1 custom-slider">
@@ -143,7 +138,7 @@
                         </button>
                     </div>
 
-                    <!-- Sépia -->
+                 
                     <div class="flex items-center gap-3">
                         <span class="text-xs text-gray-600 font-medium w-16 ml-1">Sépia</span>
                         <input type="range" id="sepia" min="0" max="100" value="0" class="flex-1 custom-slider">
@@ -153,7 +148,7 @@
                         </button>
                     </div>
 
-                    <!-- Inversion -->
+               
                     <div class="flex items-center gap-3">
                         <span class="text-xs text-gray-600 font-medium w-16 ml-1">Inversion</span>
                         <input type="range" id="invert" min="0" max="100" value="0" class="flex-1 custom-slider">
@@ -163,7 +158,7 @@
                         </button>
                     </div>
 
-                    <!-- Niveaux de gris -->
+                
                     <div class="flex items-center gap-3">
                         <span class="text-xs text-gray-600 font-medium w-16 ml-1">Gris</span>
                         <input type="range" id="grayscale" min="0" max="100" value="0" class="flex-1 custom-slider">
@@ -189,9 +184,9 @@
                     </div>
                 </div>
             </div>
-            <!-- Boutons de contrôle -->
+       
         </nav>
-        <!-- Zone de l'image -->
+
         <main class="flex-1 flex items-center justify-center bg-white overflow-auto w-full">
             <div id="image-container" class="relative w-full h-auto mx-auto hidden">
                 <img id="display-image" class="w-full h-auto mx-auto" alt="Image modifiée">
