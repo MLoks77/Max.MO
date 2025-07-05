@@ -219,7 +219,7 @@ downloadBtn.addEventListener('click', () => {
     
     
     const link = document.createElement('a');
-    link.download = 'image_modifiee.png';
+    link.download = 'image_maxMO.png';
     link.href = canvas.toDataURL('image/png');
     link.click();
 });
