@@ -89,6 +89,7 @@ imageInput.addEventListener('change', (e) => {
             placeholder.classList.add('hidden');
             optionsPanel.classList.remove('hidden');
             downloadBtn.disabled = false;
+            resetBtn.disabled = false;
             resetSliders();
         };
         img.src = event.target.result;
