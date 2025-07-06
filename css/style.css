@@ -11,7 +11,7 @@
     font-size: larger;
   }
   
-  /* Start of Selection */
+ 
 
   input[type=range].custom-slider {
     -webkit-appearance: none;
@@ -27,7 +27,7 @@
     box-shadow: 0 1px 4px #0001;
   }
   
-  /* Chrome/Safari/Opera */
+
   input[type=range].custom-slider:focus {
     background: linear-gradient(90deg, #ffb347 0%, #ff8c00 100%);
   }
@@ -42,8 +42,8 @@
     cursor: pointer;
     box-shadow: 0 2px 8px #ff8c0055;
     transition: background 0.3s, border 0.3s;
-    /* Position du thumb - peut être ajustée avec margin-top pour centrer verticalement */
-    margin-top: -8px; /* Centre le thumb sur la piste */
+   
+    margin-top: -8px; 
   }
   input[type=range].custom-slider:focus::-webkit-slider-thumb,
   input[type=range].custom-slider:hover::-webkit-slider-thumb {
@@ -66,8 +66,8 @@
     cursor: pointer;
     box-shadow: 0 2px 8px #ff8c0055;
     transition: background 0.3s, border 0.3s;
-    /* Firefox utilise transform pour positionner le thumb */
-    transform: translateY(-8px); /* Centre le thumb sur la piste */
+ 
+    transform: translateY(-8px); 
   }
   input[type=range].custom-slider:focus::-moz-range-thumb,
   input[type=range].custom-slider:hover::-moz-range-thumb {
@@ -80,7 +80,7 @@
     border-radius: 6px;
   }
   
-  /* Edge/IE */
+ 
   input[type=range].custom-slider::-ms-thumb {
     width: 22px;
     height: 22px;
@@ -90,8 +90,8 @@
     cursor: pointer;
     box-shadow: 0 2px 8px #ff8c0055;
     transition: background 0.3s, border 0.3s;
-    /* Edge/IE utilise margin-top pour positionner le thumb */
-    margin-top: -8px; /* Centre le thumb sur la piste */
+
+    margin-top: -8px; 
   }
   input[type=range].custom-slider:focus::-ms-thumb,
   input[type=range].custom-slider:hover::-ms-thumb {
@@ -104,16 +104,14 @@
     border-radius: 6px;
   }
   
-  /* Remove outline and native background */
+
   input[type=range].custom-slider:focus {
     outline: none;
   }
   input[type=range].custom-slider::-ms-tooltip {
     display: none;
   }
-  /* End of Selection */
 
-  /* Boutons personnalisés */
   .btn-primary {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
@@ -174,7 +172,7 @@
     box-shadow: 0 2px 10px rgba(247, 247, 232, 0.3);
   }
 
-  /* Effet de brillance au survol */
+
   .btn-primary::before,
   .btn-secondary::before {
     content: '';
@@ -192,7 +190,7 @@
     left: 100%;
   }
 
-  /* Animation d'apparition */
+
   @keyframes fadeInUp {
     from {
       opacity: 0;
@@ -210,7 +208,7 @@
     animation: fadeInUp 0.6s ease-out;
   }
 
-  /* Responsive pour les boutons */
+
   @media (max-width: 768px) {
     .btn-primary,
     .btn-secondary {
