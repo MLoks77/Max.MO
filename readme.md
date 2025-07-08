@@ -20,12 +20,12 @@ Aucune installation, aucun backend : tout se passe côté client, avec une int
   - Sépia
   - Inversion des couleurs
   - Niveaux de gris
-- **Réinitialisation individuelle** de chaque paramètre (icône reset)
+    
+- **Réinitialisation individuelle** de chaque paramètre
 - **Saisie manuelle** de la valeur de chaque paramètre
 - **Aperçu instantané** de l’image modifiée
 - **Téléchargement** de l’image finale (avec tous les effets appliqués)
 - **Interface responsive** (mobile & desktop)
-- **Design moderne** (sliders colorés, boutons personnalisés, icônes SVG)
 
 ---
 
@@ -36,7 +36,6 @@ Aucune installation, aucun backend : tout se passe côté client, avec une int
 - **Filtres CSS natifs** (pour la majorité des effets)
 - **Canvas API** (pour le rendu final et l’ajout de bruit)
 - **OpenCV.js** (optionnel, pour compatibilité et extensions futures)
-- **SVG** (icônes personnalisées)
 
 ---
 
