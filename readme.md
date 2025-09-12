@@ -1,6 +1,6 @@
-# 🎨 MaxMO – Éditeur d’image moderne (OpenCV.js & CSS Filters)
+# MaxMO – Éditeur d’image moderne (OpenCV.js & CSS Filters)
 
-## 🚀 Présentation
+##  Présentation
 
 MaxMO est un éditeur d’image web interactif qui permet de modifier en temps réel les couleurs et effets visuels d’une image, directement dans le navigateur.
 Aucune installation, aucun backend : tout se passe côté client, avec une interface moderne, responsive et intuitive.
@@ -29,7 +29,7 @@ Aucune installation, aucun backend : tout se passe côté client, avec une int
 
 ---
 
-## 🛠️ Technologies utilisées
+## Technologies utilisées
 
 - **HTML5 / CSS3 / Tailwind CSS**
 - **JavaScript (ES6)**
@@ -39,7 +39,7 @@ Aucune installation, aucun backend : tout se passe côté client, avec une int
 
 ---
 
-## 📦 Installation & utilisation
+## Installation & utilisation
 
 Aucune installation requise !
 
