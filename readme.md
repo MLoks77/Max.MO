@@ -49,5 +49,5 @@ Aucune installation requise !
 
 ---
 
-**Auteur** : Maxime Derènes  
+
 Projet pédagogique et créatif – 2025
