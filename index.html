@@ -5,36 +5,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MaxMO | Maxime Derènes</title>
-    
 
-    <meta name="description" content="Éditeur d'image en ligne gratuit utilisant OpenCV.js. Ajustez luminosité, contraste, saturation, teinte, ajoutez des effets (flou, sépia, inversion) et téléchargez vos images modifiées. Outil de retouche photo professionnel dans votre navigateur.">
-    <meta name="keywords" content="éditeur d'image, retouche photo, OpenCV.js, luminosité, contraste, saturation, effets photo, traitement d'image, Maxime Derènes, MaxMO">
+
+    <meta name="description"
+        content="Éditeur d'image en ligne gratuit utilisant OpenCV.js. Ajustez luminosité, contraste, saturation, teinte, ajoutez des effets (flou, sépia, inversion) et téléchargez vos images modifiées. Outil de retouche photo professionnel dans votre navigateur.">
+    <meta name="keywords"
+        content="éditeur d'image, retouche photo, OpenCV.js, luminosité, contraste, saturation, effets photo, traitement d'image, Maxime Derènes, MaxMO">
     <meta name="author" content="Maxime Derènes">
     <meta name="robots" content="index, follow">
     <meta name="language" content="fr">
     <meta name="revisit-after" content="7 days">
-    
+
 
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://maxmo.vercel.app/">
     <meta property="og:title" content="MaxMO - Éditeur d'image en ligne avec OpenCV.js">
-    <meta property="og:description" content="Éditeur d'image en ligne gratuit utilisant OpenCV.js. Ajustez luminosité, contraste, saturation, teinte, ajoutez des effets et téléchargez vos images modifiées.">
+    <meta property="og:description"
+        content="Éditeur d'image en ligne gratuit utilisant OpenCV.js. Ajustez luminosité, contraste, saturation, teinte, ajoutez des effets et téléchargez vos images modifiées.">
     <meta property="og:site_name" content="MaxMO">
     <meta property="og:locale" content="fr_FR">
-    
+
 
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://maxmo.vercel.app/">
     <meta property="twitter:title" content="MaxMO - Éditeur d'image en ligne avec OpenCV.js">
-    <meta property="twitter:description" content="Éditeur d'image en ligne gratuit utilisant OpenCV.js. Ajustez luminosité, contraste, saturation, teinte, ajoutez des effets et téléchargez vos images modifiées.">
-    
+    <meta property="twitter:description"
+        content="Éditeur d'image en ligne gratuit utilisant OpenCV.js. Ajustez luminosité, contraste, saturation, teinte, ajoutez des effets et téléchargez vos images modifiées.">
+
     <meta name="theme-color" content="#fffbbf">
     <meta name="msapplication-TileColor" content="#fffbbf">
     <meta name="application-name" content="MaxMO">
     <meta name="apple-mobile-web-app-title" content="MaxMO">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    
+
 
     <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
@@ -78,13 +82,23 @@
                 </label>
                 <input type="file" id="image-upload" accept="image/*" class="mb-4 hidden" />
                 <div id="options-panel" class="w-full flex flex-col gap-4 mb-4 hidden">
- 
+
                     <div class="flex items-center gap-3">
                         <span class="text-xs text-gray-600 font-medium w-16 ml-1">Luminosité</span>
                         <input type="range" id="brightness" min="-100" max="100" value="0" class="flex-1 custom-slider">
-                        <input id="brightness-value" type="number" min="-100" max="100" value="0" class="slider-value-input text-xs font-bold text-blue-600 w-12 text-center bg-blue-50 px-1 py-0.5 rounded border border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400 transition" />
+                        <input id="brightness-value" type="number" min="-100" max="100" value="0"
+                            class="slider-value-input text-xs font-bold text-gray-600 w-12 text-center bg-black-50 px-1 py-0.5 rounded border border-black-200 focus:outline-none focus:ring-2 focus:ring-white-400 transition" />
                         <button type="button" class="reset-slider-btn mr-2" data-slider="brightness">
-                            <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400 hover:text-blue-600 transition" fill="none"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="translate(2 2)"><path d="m12.5 1.5c2.4138473 1.37729434 4 4.02194088 4 7 0 4.418278-3.581722 8-8 8s-8-3.581722-8-8 3.581722-8 8-8"></path><path d="m12.5 5.5v-4h4"></path></g></svg>
+                            <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg"
+                                class="w-4 h-4 text-gray-400 hover:text-blue-600 transition" fill="none">
+                                <g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round"
+                                    stroke-linejoin="round" transform="translate(2 2)">
+                                    <path
+                                        d="m12.5 1.5c2.4138473 1.37729434 4 4.02194088 4 7 0 4.418278-3.581722 8-8 8s-8-3.581722-8-8 3.581722-8 8-8">
+                                    </path>
+                                    <path d="m12.5 5.5v-4h4"></path>
+                                </g>
+                            </svg>
                         </button>
                     </div>
 
@@ -92,9 +106,19 @@
                     <div class="flex items-center gap-3">
                         <span class="text-xs text-gray-600 font-medium w-16 ml-1">Contraste</span>
                         <input type="range" id="contrast" min="-100" max="100" value="0" class="flex-1 custom-slider">
-                        <input id="contrast-value" type="number" min="-100" max="100" value="0" class="slider-value-input text-xs font-bold text-blue-600 w-12 text-center bg-blue-50 px-1 py-0.5 rounded border border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400 transition" />
+                        <input id="contrast-value" type="number" min="-100" max="100" value="0"
+                            class="slider-value-input text-xs font-bold text-gray-600 w-12 text-center bg-black-50 px-1 py-0.5 rounded border border-black-200 focus:outline-none focus:ring-2 focus:ring-white-400 transition" />
                         <button type="button" class="reset-slider-btn mr-2" data-slider="contrast">
-                            <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400 hover:text-blue-600 transition" fill="none"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="translate(2 2)"><path d="m12.5 1.5c2.4138473 1.37729434 4 4.02194088 4 7 0 4.418278-3.581722 8-8 8s-8-3.581722-8-8 3.581722-8 8-8"></path><path d="m12.5 5.5v-4h4"></path></g></svg>
+                            <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg"
+                                class="w-4 h-4 text-gray-400 hover:text-blue-600 transition" fill="none">
+                                <g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round"
+                                    stroke-linejoin="round" transform="translate(2 2)">
+                                    <path
+                                        d="m12.5 1.5c2.4138473 1.37729434 4 4.02194088 4 7 0 4.418278-3.581722 8-8 8s-8-3.581722-8-8 3.581722-8 8-8">
+                                    </path>
+                                    <path d="m12.5 5.5v-4h4"></path>
+                                </g>
+                            </svg>
                         </button>
                     </div>
 
@@ -102,9 +126,19 @@
                     <div class="flex items-center gap-3">
                         <span class="text-xs text-gray-600 font-medium w-16 ml-1">Saturation</span>
                         <input type="range" id="saturation" min="-100" max="100" value="0" class="flex-1 custom-slider">
-                        <input id="saturation-value" type="number" min="-100" max="100" value="0" class="slider-value-input text-xs font-bold text-purple-600 w-12 text-center bg-purple-50 px-1 py-0.5 rounded border border-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 transition" />
+                        <input id="saturation-value" type="number" min="-100" max="100" value="0"
+                            class="slider-value-input text-xs font-bold text-gray-600 w-12 text-center bg-black-50 px-1 py-0.5 rounded border border-black-200 focus:outline-none focus:ring-2 focus:ring-white-400 transition" />
                         <button type="button" class="reset-slider-btn mr-2" data-slider="saturation">
-                            <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400 hover:text-purple-600 transition" fill="none"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="translate(2 2)"><path d="m12.5 1.5c2.4138473 1.37729434 4 4.02194088 4 7 0 4.418278-3.581722 8-8 8s-8-3.581722-8-8 3.581722-8 8-8"></path><path d="m12.5 5.5v-4h4"></path></g></svg>
+                            <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg"
+                                class="w-4 h-4 text-gray-400 hover:text-purple-600 transition" fill="none">
+                                <g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round"
+                                    stroke-linejoin="round" transform="translate(2 2)">
+                                    <path
+                                        d="m12.5 1.5c2.4138473 1.37729434 4 4.02194088 4 7 0 4.418278-3.581722 8-8 8s-8-3.581722-8-8 3.581722-8 8-8">
+                                    </path>
+                                    <path d="m12.5 5.5v-4h4"></path>
+                                </g>
+                            </svg>
                         </button>
                     </div>
 
@@ -112,68 +146,136 @@
                     <div class="flex items-center gap-3">
                         <span class="text-xs text-gray-600 font-medium w-16 ml-1">Teinte</span>
                         <input type="range" id="hue" min="-180" max="180" value="0" class="flex-1 custom-slider">
-                        <input id="hue-value" type="number" min="-180" max="180" value="0" class="slider-value-input text-xs font-bold text-purple-600 w-12 text-center bg-purple-50 px-1 py-0.5 rounded border border-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 transition" />
+                        <input id="hue-value" type="number" min="-180" max="180" value="0"
+                            class="slider-value-input text-xs font-bold text-gray-600 w-12 text-center bg-black-50 px-1 py-0.5 rounded border border-black-200 focus:outline-none focus:ring-2 focus:ring-white-400 transition" />
                         <button type="button" class="reset-slider-btn mr-2" data-slider="hue">
-                            <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400 hover:text-purple-600 transition" fill="none"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="translate(2 2)"><path d="m12.5 1.5c2.4138473 1.37729434 4 4.02194088 4 7 0 4.418278-3.581722 8-8 8s-8-3.581722-8-8 3.581722-8 8-8"></path><path d="m12.5 5.5v-4h4"></path></g></svg>
+                            <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg"
+                                class="w-4 h-4 text-gray-400 hover:text-purple-600 transition" fill="none">
+                                <g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round"
+                                    stroke-linejoin="round" transform="translate(2 2)">
+                                    <path
+                                        d="m12.5 1.5c2.4138473 1.37729434 4 4.02194088 4 7 0 4.418278-3.581722 8-8 8s-8-3.581722-8-8 3.581722-8 8-8">
+                                    </path>
+                                    <path d="m12.5 5.5v-4h4"></path>
+                                </g>
+                            </svg>
                         </button>
                     </div>
 
-                   
+
                     <div class="flex items-center gap-3">
                         <span class="text-xs text-gray-600 font-medium w-16 ml-1">Bruit</span>
                         <input type="range" id="noise" min="0" max="100" value="0" class="flex-1 custom-slider">
-                        <input id="noise-value" type="number" min="0" max="100" value="0" class="slider-value-input text-xs font-bold text-green-600 w-12 text-center bg-green-50 px-1 py-0.5 rounded border border-green-200 focus:outline-none focus:ring-2 focus:ring-green-400 transition" />
+                        <input id="noise-value" type="number" min="0" max="100" value="0"
+                            class="slider-value-input text-xs font-bold text-gray-600 w-12 text-center bg-black-50 px-1 py-0.5 rounded border border-black-200 focus:outline-none focus:ring-2 focus:ring-white-400 transition" />
                         <button type="button" class="reset-slider-btn mr-2" data-slider="noise">
-                            <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400 hover:text-green-600 transition" fill="none"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="translate(2 2)"><path d="m12.5 1.5c2.4138473 1.37729434 4 4.02194088 4 7 0 4.418278-3.581722 8-8 8s-8-3.581722-8-8 3.581722-8 8-8"></path><path d="m12.5 5.5v-4h4"></path></g></svg>
+                            <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg"
+                                class="w-4 h-4 text-gray-400 hover:text-green-600 transition" fill="none">
+                                <g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round"
+                                    stroke-linejoin="round" transform="translate(2 2)">
+                                    <path
+                                        d="m12.5 1.5c2.4138473 1.37729434 4 4.02194088 4 7 0 4.418278-3.581722 8-8 8s-8-3.581722-8-8 3.581722-8 8-8">
+                                    </path>
+                                    <path d="m12.5 5.5v-4h4"></path>
+                                </g>
+                            </svg>
                         </button>
                     </div>
 
-                  
+
                     <div class="flex items-center gap-3">
                         <span class="text-xs text-gray-600 font-medium w-16 ml-1">Flou</span>
                         <input type="range" id="blur" min="0" max="20" value="0" class="flex-1 custom-slider">
-                        <input id="blur-value" type="number" min="0" max="20" value="0" class="slider-value-input text-xs font-bold text-green-600 w-12 text-center bg-green-50 px-1 py-0.5 rounded border border-green-200 focus:outline-none focus:ring-2 focus:ring-green-400 transition" />
+                        <input id="blur-value" type="number" min="0" max="20" value="0"
+                            class="slider-value-input text-xs font-bold text-gray-600 w-12 text-center bg-black-50 px-1 py-0.5 rounded border border-black-200 focus:outline-none focus:ring-2 focus:ring-white-400 transition" />
                         <button type="button" class="reset-slider-btn mr-2" data-slider="blur">
-                            <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400 hover:text-green-600 transition" fill="none"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="translate(2 2)"><path d="m12.5 1.5c2.4138473 1.37729434 4 4.02194088 4 7 0 4.418278-3.581722 8-8 8s-8-3.581722-8-8 3.581722-8 8-8"></path><path d="m12.5 5.5v-4h4"></path></g></svg>
+                            <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg"
+                                class="w-4 h-4 text-gray-400 hover:text-green-600 transition" fill="none">
+                                <g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round"
+                                    stroke-linejoin="round" transform="translate(2 2)">
+                                    <path
+                                        d="m12.5 1.5c2.4138473 1.37729434 4 4.02194088 4 7 0 4.418278-3.581722 8-8 8s-8-3.581722-8-8 3.581722-8 8-8">
+                                    </path>
+                                    <path d="m12.5 5.5v-4h4"></path>
+                                </g>
+                            </svg>
                         </button>
                     </div>
 
-                 
+
                     <div class="flex items-center gap-3">
                         <span class="text-xs text-gray-600 font-medium w-16 ml-1">Sépia</span>
                         <input type="range" id="sepia" min="0" max="100" value="0" class="flex-1 custom-slider">
-                        <input id="sepia-value" type="number" min="0" max="100" value="0" class="slider-value-input text-xs font-bold text-orange-600 w-12 text-center bg-orange-50 px-1 py-0.5 rounded border border-orange-200 focus:outline-none focus:ring-2 focus:ring-orange-400 transition" />
+                        <input id="sepia-value" type="number" min="0" max="100" value="0"
+                            class="slider-value-input text-xs font-bold text-gray-600 w-12 text-center bg-black-50 px-1 py-0.5 rounded border border-black-200 focus:outline-none focus:ring-2 focus:ring-white-400 transition" />
                         <button type="button" class="reset-slider-btn mr-2" data-slider="sepia">
-                            <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400 hover:text-orange-600 transition" fill="none"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="translate(2 2)"><path d="m12.5 1.5c2.4138473 1.37729434 4 4.02194088 4 7 0 4.418278-3.581722 8-8 8s-8-3.581722-8-8 3.581722-8 8-8"></path><path d="m12.5 5.5v-4h4"></path></g></svg>
+                            <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg"
+                                class="w-4 h-4 text-gray-400 hover:text-orange-600 transition" fill="none">
+                                <g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round"
+                                    stroke-linejoin="round" transform="translate(2 2)">
+                                    <path
+                                        d="m12.5 1.5c2.4138473 1.37729434 4 4.02194088 4 7 0 4.418278-3.581722 8-8 8s-8-3.581722-8-8 3.581722-8 8-8">
+                                    </path>
+                                    <path d="m12.5 5.5v-4h4"></path>
+                                </g>
+                            </svg>
                         </button>
                     </div>
 
-               
+
                     <div class="flex items-center gap-3">
                         <span class="text-xs text-gray-600 font-medium w-16 ml-1">Inversion</span>
                         <input type="range" id="invert" min="0" max="100" value="0" class="flex-1 custom-slider">
-                        <input id="invert-value" type="number" min="0" max="100" value="0" class="slider-value-input text-xs font-bold text-red-600 w-12 text-center bg-red-50 px-1 py-0.5 rounded border border-red-200 focus:outline-none focus:ring-2 focus:ring-red-400 transition" />
+                        <input id="invert-value" type="number" min="0" max="100" value="0"
+                            class="slider-value-input text-xs font-bold text-gray-600 w-12 text-center bg-black-50 px-1 py-0.5 rounded border border-black-200 focus:outline-none focus:ring-2 focus:ring-white-400 transition" />
                         <button type="button" class="reset-slider-btn mr-2" data-slider="invert">
-                            <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400 hover:text-red-600 transition" fill="none"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="translate(2 2)"><path d="m12.5 1.5c2.4138473 1.37729434 4 4.02194088 4 7 0 4.418278-3.581722 8-8 8s-8-3.581722-8-8 3.581722-8 8-8"></path><path d="m12.5 5.5v-4h4"></path></g></svg>
+                            <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg"
+                                class="w-4 h-4 text-gray-400 hover:text-red-600 transition" fill="none">
+                                <g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round"
+                                    stroke-linejoin="round" transform="translate(2 2)">
+                                    <path
+                                        d="m12.5 1.5c2.4138473 1.37729434 4 4.02194088 4 7 0 4.418278-3.581722 8-8 8s-8-3.581722-8-8 3.581722-8 8-8">
+                                    </path>
+                                    <path d="m12.5 5.5v-4h4"></path>
+                                </g>
+                            </svg>
                         </button>
                     </div>
 
-                
+
                     <div class="flex items-center gap-3">
                         <span class="text-xs text-gray-600 font-medium w-16 ml-1">Gris</span>
                         <input type="range" id="grayscale" min="0" max="100" value="0" class="flex-1 custom-slider">
-                        <input id="grayscale-value" type="number" min="0" max="100" value="0" class="slider-value-input text-xs font-bold text-gray-600 w-12 text-center bg-gray-50 px-1 py-0.5 rounded border border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-400 transition" />
+                        <input id="grayscale-value" type="number" min="0" max="100" value="0"
+                            class="slider-value-input text-xs font-bold text-gray-600 w-12 text-center bg-black-50 px-1 py-0.5 rounded border border-black-200 focus:outline-none focus:ring-2 focus:ring-white-400 transition" />
                         <button type="button" class="reset-slider-btn mr-2" data-slider="grayscale">
-                            <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400 hover:text-gray-600 transition" fill="none"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="translate(2 2)"><path d="m12.5 1.5c2.4138473 1.37729434 4 4.02194088 4 7 0 4.418278-3.581722 8-8 8s-8-3.581722-8-8 3.581722-8 8-8"></path><path d="m12.5 5.5v-4h4"></path></g></svg>
+                            <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg"
+                                class="w-4 h-4 text-gray-400 hover:text-gray-600 transition" fill="none">
+                                <g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round"
+                                    stroke-linejoin="round" transform="translate(2 2)">
+                                    <path
+                                        d="m12.5 1.5c2.4138473 1.37729434 4 4.02194088 4 7 0 4.418278-3.581722 8-8 8s-8-3.581722-8-8 3.581722-8 8-8">
+                                    </path>
+                                    <path d="m12.5 5.5v-4h4"></path>
+                                </g>
+                            </svg>
                         </button>
                     </div>
                     <div class="flex flex-col gap-3 w-full px-4">
                         <button id="reset-btn" class="btn-secondary flex items-center justify-center gap-2" disabled>
-                            <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white-400 hover:text-gray-600 transition" fill="none"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="translate(2 2)"><path d="m12.5 1.5c2.4138473 1.37729434 4 4.02194088 4 7 0 4.418278-3.581722 8-8 8s-8-3.581722-8-8 3.581722-8 8-8"></path><path d="m12.5 5.5v-4h4"></path></g></svg>
+                            <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg"
+                                class="w-4 h-4 text-white-400 hover:text-gray-600 transition" fill="none">
+                                <g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round"
+                                    stroke-linejoin="round" transform="translate(2 2)">
+                                    <path
+                                        d="m12.5 1.5c2.4138473 1.37729434 4 4.02194088 4 7 0 4.418278-3.581722 8-8 8s-8-3.581722-8-8 3.581722-8 8-8">
+                                    </path>
+                                    <path d="m12.5 5.5v-4h4"></path>
+                                </g>
+                            </svg>
                             Reset
                         </button>
-                        <button id="download-btn" class="btn-primary flex items-center justify-center gap-2"
-                            disabled>
+                        <button id="download-btn" class="btn-primary flex items-center justify-center gap-2" disabled>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -184,7 +286,7 @@
                     </div>
                 </div>
             </div>
-       
+
         </nav>
 
         <main class="flex-1 flex items-center justify-center bg-white overflow-auto w-full">
