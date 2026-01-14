@@ -7,7 +7,7 @@ Aucune installation, aucun backend : tout se passe côté client, avec une int
 
 ---
 
-## ✨ Fonctionnalités principales
+## Fonctionnalités principales
 
 - **Import d’image** (JPEG, PNG…)
 - **Ajustements en temps réel** via sliders ou saisie directe :
@@ -32,10 +32,9 @@ Aucune installation, aucun backend : tout se passe côté client, avec une int
 ## Technologies utilisées
 
 - **HTML5 / CSS3 / Tailwind CSS**
-- **JavaScript (ES6)**
-- **Filtres CSS natifs** (pour la majorité des effets)
+- **JavaScript**
+- **Filtres CSS** (pour la majorité des effets)
 - **Canvas API** (pour le rendu final et l’ajout de bruit)
-- **OpenCV.js** (optionnel, pour compatibilité et extensions futures)
 
 ---
 
@@ -45,9 +44,7 @@ Aucune installation requise !
 
 1. Clone ou télécharge ce dépôt.
 2. Ouvre simplement `index.html` dans ton navigateur moderne (Chrome, Firefox, Edge, Safari…).
-3. Profite de l’édition d’image instantanée !
 
 ---
 
-
-Projet pédagogique et créatif – 2025
+2025
